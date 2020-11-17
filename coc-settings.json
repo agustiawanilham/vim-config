@@ -1,0 +1,20 @@
+{
+  "eslint.autoFix": false,
+  "eslint.autoFixOnSave": false,
+  "eslint.filetypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "json"
+  ],
+  "diagnostic.signOffset": 9999999,
+  "diagnostic.virtualText": true,
+  "signature.target": "float",
+  "tsserver.log": "verbose",
+  "suggest.echodocSupport": true,
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+    "javascript": "javascriptreact"
+  }
+}

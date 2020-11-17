@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =9
+let g:netrw_dirhist_9='C:\Users\NDS.NDS-LPT-0167\AppData\Local\nvim'
+let g:netrw_dirhist_8='C:/Users/NDS.NDS-LPT-0167/dev/TalentaDigital/MobileProjects/MobileApps/TalentaDigital/src/components/message'
+let g:netrw_dirhist_7='C:/Users/NDS.NDS-LPT-0167/dev/TalentaDigital/MobileProjects/MobileApps/TalentaDigital/src/components'
+let g:netrw_dirhist_6='C:/Users/NDS.NDS-LPT-0167/dev/TalentaDigital/MobileProjects/MobileApps/TalentaDigital/src'
+let g:netrw_dirhist_5='C:/Users/NDS.NDS-LPT-0167/dev/TalentaDigital/MobileProjects/MobileApps/TalentaDigital/src/assets'
+let g:netrw_dirhist_4='C:/Users/NDS.NDS-LPT-0167/dev/TalentaDigital/MobileProjects/MobileApps/TalentaDigital/src'
+let g:netrw_dirhist_3='C:/Users/NDS.NDS-LPT-0167/dev/TalentaDigital/MobileProjects/MobileApps/TalentaDigital'
+let g:netrw_dirhist_2='C:\Users\NDS.NDS-LPT-0167\dev\TalentaDigital\MobileProjects\MobileApps\TalentaDigital'
+let g:netrw_dirhist_1='C:\Users\NDS.NDS-LPT-0167\dev\MyApp'
