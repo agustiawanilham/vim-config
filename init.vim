@@ -5,7 +5,7 @@ set termguicolors
 set nu 					                " number lines
 set rnu 		
 set noshowmode 	
-set mouse=       
+set mouse=a
 set ruler         
 set updatetime=50  
 set nowrap
@@ -78,7 +78,7 @@ set undofile " Maintain undo history between sessions
 set undodir=~/.vim/undodir
 
 call plug#begin('~/.vim/plugged')
-Plug 'rstacruz/vim-closer'
+Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -86,19 +86,19 @@ Plug 'tpope/vim-commentary'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-easy-align'
-" Plug 'SirVer/ultisnips'
 Plug 'junegunn/goyo.vim'
 
 "Javascript
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'pangloss/vim-javascript'
 Plug 'prettier/vim-prettier', {
 			\ 'do': 'npm install',
 			\ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 
 " C#
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 
 " LSP
 Plug 'nvim-treesitter/nvim-treesitter'
@@ -109,21 +109,17 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
 
+" Snippets
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'dsznajder/vscode-es7-javascript-react-snippets'
+
+
 " Theme
 Plug 'mhinz/vim-startify'
 Plug 'itchyny/lightline.vim'
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'gruvbox-community/gruvbox'
-
-
-"Not used
-" Plug 'vim-airline/vim-airline'
-" Plug 'OmniSharp/omnisharp-vim'
-" Plug 'jiangmiao/auto-pairs'
-
-" Drop Coc, changes to lsp
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-eslint', 'coc-omnisharp', 'coc-prettier']
 
 call plug#end()
 
@@ -150,17 +146,26 @@ inoremap jk <Esc>
 set background=dark
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_italic=1
-let g:gruvbox_sign_column='bg0'
+if exists('+termguicolors')
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    endif
+    let g:gruvbox_invert_selection='0'
+
+    highlight ColorColumn ctermbg=0 guibg=grey
+    highlight Normal guibg=none
 colorscheme gruvbox
 
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy' ]
-let g:completion_enable_auto_hover = 0
-
-" let g:diagnostic_enable_virtual_text = 1
-" let g:diagnostic_virtual_text_prefix = ' '
-" let g:diagnostic_show_sign = 1
+let g:completion_enable_auto_hover = 1
+let g:completion_enable_snippet = 'vim-vsnip'
 
 imap <silent> <c-space> <Plug>(completion_trigger)
+
+" Snippets
+let g:vsnip_filetypes = {}
+let g:vsnip_filetypes.javascriptreact = ['javascript']
+let g:vsnip_filetypes.typescriptreact = ['typescript']
 
 " For Completion
 :lua << EOF
@@ -169,7 +174,7 @@ imap <silent> <c-space> <Plug>(completion_trigger)
     require('completion').on_attach()
   end
 
-  local servers = {'tsserver', 'omnisharp'}
+  local servers = {'tsserver'}
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
       on_attach = on_attach,
@@ -178,18 +183,8 @@ imap <silent> <c-space> <Plug>(completion_trigger)
 
 	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 	  vim.lsp.diagnostic.on_publish_diagnostics, {
-	    -- This will disable virtual text, like doing:
-	    -- let g:diagnostic_enable_virtual_text = 0
 	    virtual_text = true,
-
-	    -- This is similar to:
-	    -- let g:diagnostic_show_sign = 1
-	    -- To configure sign display,
-	    --  see: ":help vim.lsp.diagnostic.set_signs()"
 	    signs = true,
-
-	    -- This is similar to:
-	    -- "let g:diagnostic_insert_delay = 1"
 	    update_in_insert = false,
 	  }
 	)
