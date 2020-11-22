@@ -153,30 +153,14 @@ let g:gruvbox_italic=1
 let g:gruvbox_sign_column='bg0'
 colorscheme gruvbox
 
-" Theme and Styling
-" let g:ale_fix_on_save = 1
-" let g:ale_linters = {
-"       \'javascript': ['eslint', 'prettier'],
-"       \'typescript': ['eslint', 'prettier'],
-"       \}
-" let g:ale_javascript_prettier_use_local_config = 1
-" let g:ale_sign_column_always = 1
-" let g:ale_completion_enabled = 0
-" let g:ale_completion_tsserver_autoimport = 1
-" let g:ale_fixers = {
-"       \'javascript': ['eslint', 'prettier'],
-"       \'json': ['prettier'],
-"       \'typescript': ['eslint', 'prettier'],
-"       \'markdown': ['prettier'],
-"       \}
-" let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-
-" nmap <leader>f <Plug>(ale_fix)
-" nmap <silent> <leader>[ <Plug>(ale_previous_wrap)
-" nmap <silent> <leader>] <Plug>(ale_next_wrap)
-
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy' ]
 let g:completion_enable_auto_hover = 0
+
+" let g:diagnostic_enable_virtual_text = 1
+" let g:diagnostic_virtual_text_prefix = ' '
+" let g:diagnostic_show_sign = 1
+
+imap <silent> <c-space> <Plug>(completion_trigger)
 
 " For Completion
 :lua << EOF
@@ -192,7 +176,6 @@ let g:completion_enable_auto_hover = 0
     }
   end
 
-  --[[
 	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 	  vim.lsp.diagnostic.on_publish_diagnostics, {
 	    -- This will disable virtual text, like doing:
@@ -210,7 +193,6 @@ let g:completion_enable_auto_hover = 0
 	    update_in_insert = false,
 	  }
 	)
-  --]]
 
   require'nvim-treesitter.configs'.setup {
     ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
